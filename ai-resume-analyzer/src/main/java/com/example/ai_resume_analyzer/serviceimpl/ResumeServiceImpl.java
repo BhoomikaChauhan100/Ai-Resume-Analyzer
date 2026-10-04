@@ -48,13 +48,15 @@ public class ResumeServiceImpl implements ResumeService {
             }
 
             String uploadDir =
-                    "C:/resume_uploads/";
+        System.getProperty("java.io.tmpdir") + "resume_uploads";
 
-            File dir = new File(uploadDir);
+File dir = new File(uploadDir);
 
-            if (!dir.exists()) {
-                dir.mkdirs();
-            }
+if (!dir.exists() && !dir.mkdirs()) {
+    throw new RuntimeException(
+            "Unable to create upload directory."
+    );
+}
 
             String fileName =
                     file.getOriginalFilename();
